@@ -3,8 +3,8 @@ import { ActionTypes, AsyncActionTypes } from '../Actions/Consts';
 
 export interface IStoreState {
     checkAuth: boolean;
-    loading: boolean;
-    failure: boolean
+    loading?: boolean;
+    failure?: boolean
 }
 
 const initialState = {
@@ -51,3 +51,6 @@ export function reducer(state: IStoreState = initialState.state, action: IAction
     }
     return state;
 }
+
+
+

@@ -5,7 +5,7 @@ import { ILoginData } from "./Models";
 
 export class Actions {
     constructor(private dispatch: Dispatch<IActionType>) { }
-    validation = (loginData: ILoginData) => {
+    validation = (loginData: ILoginData, cb: Function) => {
         this.dispatch({ type: `${ActionTypes.LOGIN}${AsyncActionTypes.BEGIN}` });
         const options = {
             method: 'GET'
@@ -26,6 +26,7 @@ export class Actions {
             .then(data => {
                 if (loginData.login === data[0].login && loginData.pass === data[0].password) {
                     this.dispatch({ type: `${ActionTypes.LOGIN}${AsyncActionTypes.SUCCESS}` });
+                    cb();
                 } else {
                     // eslint-disable-next-line no-throw-literal
                     this.dispatch({ type: `${ActionTypes.LOGIN}${AsyncActionTypes.INCORRECT_AUTH}` });

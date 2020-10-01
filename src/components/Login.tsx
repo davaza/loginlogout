@@ -5,25 +5,31 @@ import { Redirect } from "react-router-dom";
 
 interface ILoginProps {
   checkAuth?: boolean;
-  // checkClickLogin: boolean;
-  // changeStateCheckClick: Function;
+  // location: any;
+}
+interface ILoginCheckState {
+  redirectToPreviousRoute: boolean;
 }
 
 type TLoginProps = IDispatchProps & ILoginProps;
+type TLoginState = ILoginData & ILoginCheckState;
 
-export class Login extends React.Component<TLoginProps, ILoginData> {
+export class Login extends React.Component<TLoginProps, TLoginState> {
   /**
    *Обработчик проверки логина и пароля с формы
    */
-  state: ILoginData = {
+  state: TLoginState = {
     login: "",
     pass: "",
+    redirectToPreviousRoute: false,
   };
 
   onbtnClickHandler = (e: any) => {
     e.preventDefault();
     const { login, pass } = this.state;
-    this.props.actions.validation({ login, pass });
+    this.props.actions.validation({ login, pass }, () => {
+      this.setState({ redirectToPreviousRoute: true });
+    });
   };
 
   handleChangeLogin = (e: any) => {
@@ -37,12 +43,16 @@ export class Login extends React.Component<TLoginProps, ILoginData> {
   };
 
   render() {
-    const { login, pass } = this.state;
+    const { login, pass, redirectToPreviousRoute } = this.state;
+    // const { location } = this.props;
+    // const { from } = location.state;
     // if (checkAuth) {
     //   // this.props.changeStateCheckClick();
     //   return <Redirect to="/profile" />;
     // }
-
+    if (redirectToPreviousRoute) {
+      return <Redirect to={"/profile"} />;
+    }
     return (
       <div className="form-auth-wrap">
         <form className="form-auth clearfix">

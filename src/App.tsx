@@ -1,35 +1,23 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Main } from "./components/Main";
 import { Login } from "./components/Login";
-import { Logout } from "./components/Logout";
 import { News } from "./components/News";
 import { Profile } from "./components/Profile";
 import { Actions } from "./Actions/Actions";
 import { IDispatchProps } from "./Actions/Consts";
 
-import { IActionType } from "./common";
+import { IActionType, IStateProps } from "./common";
 import "./App.css";
-import { IStoreState } from "./Reducers/Reducers";
-
+import { IStoreState } from "./Reducers/reducer";
+import { PrivateRoute } from "./Containers/PrivateRoute";
 /**
  * Пропсы для передачи экшенов.
  * @prop {Actions} actions Экшены для работы приложения.
  */
 
-interface IStateProps {
-  checkAuth: boolean;
-  loading: boolean;
-  failure: boolean;
-}
 interface IStateApp {
   checkClickLogin: boolean;
 }
@@ -83,37 +71,12 @@ class App extends React.Component<TProps, IStateApp> {
             <Route exact path="/">
               <Main />
             </Route>
-            {/* <Route
-              path={checkAuth ? "/logout" : "/login"}
-              render={() =>
-                checkAuth ? (
-                  <Logout actions={actions} checkAuth={checkAuth} />
-                ) : (
-                  <Login actions={actions} checkAuth={checkAuth} />
-                )
-              }
-            /> */}
-            {/* {checkAuth ? (
-              <Logout actions={actions} />
-            ) : (
-              <Login actions={actions} />
-            )} */}
-            <Route path="/logout" render={() => <Logout actions={actions} />} />
-            <Route path="/login" render={() => <Login actions={actions} />} />
-
             <Route path="/news">
               <News />
             </Route>
-            <Route
-              path="/profile"
-              render={() =>
-                !checkAuth ? <Login actions={actions} /> : <Profile />
-              }
-            />
-            {/* <Route path="/profile">
-              {console.log("checkAuth: ", checkAuth)}
-              {component}
-            </Route> */}
+            <Route path="/login" render={() => <Login actions={actions} />} />
+
+            <PrivateRoute path="/profile" component={Profile} />
           </Switch>
         </div>
       </Router>
