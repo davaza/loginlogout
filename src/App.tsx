@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Main } from "./components/Main";
-import { Login } from "./components/Login";
+import { LoginContainer } from "./Containers/LoginContainer";
 import { News } from "./components/News";
 import { Profile } from "./components/Profile";
 import { Actions } from "./Actions/Actions";
@@ -18,24 +18,24 @@ import { PrivateRoute } from "./Containers/PrivateRoute";
  * @prop {Actions} actions Экшены для работы приложения.
  */
 
-interface IStateApp {
-  checkClickLogin: boolean;
-}
+// interface IStateApp {
+//   checkClickLogin: boolean;
+// }
 
 type TProps = IStateProps & IDispatchProps;
 
-class App extends React.Component<TProps, IStateApp> {
-  state: IStateApp = {
-    checkClickLogin: true,
-  };
-  onbtnClickHandler() {
-    this.setState({ checkClickLogin: true });
-  }
+export class App extends React.Component<{}, {}> {
+  // state: IStateApp = {
+  //   checkClickLogin: true,
+  // };
+  // onbtnClickHandler() {
+  //   this.setState({ checkClickLogin: true });
+  // }
   // changeStateCheckClick() {
   //   this.setState({ checkClickLogin: false });
   // }
   render() {
-    let { checkAuth, actions } = this.props;
+    // let { checkAuth, actions } = this.props;
     // let { checkClickLogin } = this.state;
     // let component;
     // if (checkAuth) {
@@ -52,11 +52,12 @@ class App extends React.Component<TProps, IStateApp> {
             </li>
             <li>
               <div className="test">
-                {checkAuth ? (
+                <Link to="/login">Вход</Link>
+                {/* {checkAuth ? (
                   <Link to="/logout">Выход</Link>
                 ) : (
                   <Link to="/login">Вход</Link>
-                )}
+                )} */}
               </div>
             </li>
             <li>
@@ -74,8 +75,7 @@ class App extends React.Component<TProps, IStateApp> {
             <Route path="/news">
               <News />
             </Route>
-            <Route path="/login" render={() => <Login actions={actions} />} />
-
+            <Route path="/login" component={LoginContainer} />
             <PrivateRoute path="/profile" component={Profile} />
           </Switch>
         </div>
@@ -84,20 +84,20 @@ class App extends React.Component<TProps, IStateApp> {
   }
 }
 
-function mapStateToProps(state: IStoreState): IStateProps {
-  return {
-    checkAuth: state.checkAuth,
-    loading: state.loading,
-    failure: state.failure,
-  };
-}
+// function mapStateToProps(state: IStoreState): IStateProps {
+//   return {
+//     checkAuth: state.checkAuth,
+//     loading: state.loading,
+//     failure: state.failure,
+//   };
+// }
 
-function mapDispatchToProps(dispatch: Dispatch<IActionType>): IDispatchProps {
-  return {
-    actions: new Actions(dispatch),
-  };
-}
+// function mapDispatchToProps(dispatch: Dispatch<IActionType>): IDispatchProps {
+//   return {
+//     actions: new Actions(dispatch),
+//   };
+// }
 
-const connectApp = connect(mapStateToProps, mapDispatchToProps)(App);
+// const connectApp = connect(mapStateToProps, mapDispatchToProps)(App);
 
-export { connectApp as App };
+// export { connectApp as App };

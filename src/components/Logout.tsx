@@ -4,8 +4,6 @@ import { Redirect, Route } from "react-router-dom";
 
 interface ILoginProps {
   checkAuth?: boolean;
-  // checkClickLogin: boolean;
-  // changeStateCheckClick: Function;
 }
 
 type TLoginProps = IDispatchProps & ILoginProps;

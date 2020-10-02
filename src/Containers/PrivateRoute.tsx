@@ -11,7 +11,7 @@ interface PrivateRouteProps extends RouteProps {
 }
 
 const PrivateRoute = (props: PrivateRouteProps) => {
-  const { component: Component, checkAuth, ...rest } = props;
+  const { component: Component, checkAuth, location, ...rest } = props;
   return (
     <Route
       {...rest}

@@ -1,11 +1,11 @@
 import React from "react";
 import { IDispatchProps } from "../Actions/Consts";
 import { ILoginData } from "../Actions/Models";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 
 interface ILoginProps {
   checkAuth?: boolean;
-  // location: any;
+  location?: any;
 }
 interface ILoginCheckState {
   redirectToPreviousRoute: boolean;
@@ -42,16 +42,21 @@ export class Login extends React.Component<TLoginProps, TLoginState> {
     this.setState({ pass: value });
   };
 
+  componentDidMount() {
+    console.log("this.props.location: ", this.props.location);
+  }
+
   render() {
     const { login, pass, redirectToPreviousRoute } = this.state;
-    // const { location } = this.props;
-    // const { from } = location.state;
+    const { location } = this.props;
+    const { from } = location.state || { from: { pathname: "/" } };
     // if (checkAuth) {
     //   // this.props.changeStateCheckClick();
     //   return <Redirect to="/profile" />;
     // }
+    console.log("this.props: ", this.props);
     if (redirectToPreviousRoute) {
-      return <Redirect to={"/profile"} />;
+      return <Redirect to={from} />;
     }
     return (
       <div className="form-auth-wrap">
