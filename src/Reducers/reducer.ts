@@ -4,7 +4,8 @@ import { ActionTypes, AsyncActionTypes } from '../Actions/Consts';
 export interface IStoreState {
     checkAuth: boolean;
     loading?: boolean;
-    failure?: boolean
+    failure?: boolean;
+    user?: { name: string };
 }
 
 const initialState = {
@@ -12,7 +13,8 @@ const initialState = {
         return {
             checkAuth: false,
             loading: false,
-            failure: false
+            failure: false,
+            user: undefined
         }
     }
 }
@@ -28,7 +30,10 @@ export function reducer(state: IStoreState = initialState.state, action: IAction
             return {
                 ...state,
                 loading: false,
-                checkAuth: true
+                checkAuth: true,
+                user: {
+                    name: action.payload.name,
+                }
             }
         case `${ActionTypes.LOGIN}${AsyncActionTypes.INCORRECT_AUTH}`:
             return {

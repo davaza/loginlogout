@@ -25,7 +25,10 @@ export class Actions {
             })
             .then(data => {
                 if (loginData.login === data[0].login && loginData.pass === data[0].password) {
-                    this.dispatch({ type: `${ActionTypes.LOGIN}${AsyncActionTypes.SUCCESS}` });
+                    this.dispatch({
+                        type: `${ActionTypes.LOGIN}${AsyncActionTypes.SUCCESS}`,
+                        payload: { name: data[0].login }
+                    });
                     cb();
                 } else {
                     // eslint-disable-next-line no-throw-literal
@@ -34,8 +37,9 @@ export class Actions {
             });
 
     };
-    logout = () => {
+    logout = (cb: Function) => {
         console.log('Проверка1!')
         this.dispatch({ type: `${ActionTypes.LOGOUT}` });
+        cb();
     };
 }

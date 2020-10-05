@@ -6,7 +6,12 @@ export interface IActionType extends Action {
 }
 
 export interface IStateProps {
-  checkAuth: boolean;
+  checkAuth?: boolean;
   loading?: boolean;
   failure?: boolean;
+  user?: { name: string };
+}
+
+export interface ILoginCheckState {
+  redirectToPreviousRoute: boolean;
 }

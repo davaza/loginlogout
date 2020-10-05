@@ -1,16 +1,13 @@
 import React from "react";
 import { IDispatchProps } from "../Actions/Consts";
 import { ILoginData } from "../Actions/Models";
-import { Redirect, useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
+import { ILoginCheckState } from "../common";
 
 interface ILoginProps {
   checkAuth?: boolean;
   location?: any;
 }
-interface ILoginCheckState {
-  redirectToPreviousRoute: boolean;
-}
-
 type TLoginProps = IDispatchProps & ILoginProps;
 type TLoginState = ILoginData & ILoginCheckState;
 
@@ -35,26 +32,20 @@ export class Login extends React.Component<TLoginProps, TLoginState> {
   handleChangeLogin = (e: any) => {
     const { value } = e.currentTarget;
     this.setState({ login: value });
+    console.log("setState: ");
   };
 
   handleChangePass = (e: any) => {
     const { value } = e.currentTarget;
     this.setState({ pass: value });
+    console.log("setState: ");
   };
-
-  componentDidMount() {
-    console.log("this.props.location: ", this.props.location);
-  }
 
   render() {
     const { login, pass, redirectToPreviousRoute } = this.state;
     const { location } = this.props;
     const { from } = location.state || { from: { pathname: "/" } };
-    // if (checkAuth) {
-    //   // this.props.changeStateCheckClick();
-    //   return <Redirect to="/profile" />;
-    // }
-    console.log("this.props: ", this.props);
+
     if (redirectToPreviousRoute) {
       return <Redirect to={from} />;
     }
