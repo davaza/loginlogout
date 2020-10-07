@@ -7,8 +7,14 @@ export class Actions {
     constructor(private dispatch: Dispatch<IActionType>) { }
     validation = (loginData: ILoginData, cb: Function) => {
         this.dispatch({ type: `${ActionTypes.LOGIN}${AsyncActionTypes.BEGIN}` });
+        var bodyParams = {
+            email: loginData.login,
+            password: loginData.pass
+        }
         const options = {
-            method: 'GET'
+            headers: { 'Content-Type': 'application/json' },
+            method: 'POST',
+            body: JSON.stringify(bodyParams)
         }
 
         fetch(UrlTypes.URL_LOGIN, options)
@@ -24,13 +30,21 @@ export class Actions {
                 return response.json();
             })
             .then(data => {
-                if (loginData.login === data[0].login && loginData.pass === data[0].password) {
+                if (data.status === "ok" && data.data.id !== undefined) {
                     this.dispatch({
                         type: `${ActionTypes.LOGIN}${AsyncActionTypes.SUCCESS}`,
-                        payload: { name: data[0].login }
+                        payload: { name: "TEST" }
                     });
                     cb();
-                } else {
+                }
+                // if (loginData.login === data[0].login && loginData.pass === data[0].password) {
+                //     this.dispatch({
+                //         type: `${ActionTypes.LOGIN}${AsyncActionTypes.SUCCESS}`,
+                //         payload: { name: data[0].login }
+                //     });
+                //     cb();
+                // } 
+                else {
                     // eslint-disable-next-line no-throw-literal
                     this.dispatch({ type: `${ActionTypes.LOGIN}${AsyncActionTypes.INCORRECT_AUTH}` });
                 }
@@ -38,7 +52,6 @@ export class Actions {
 
     };
     logout = (cb: Function) => {
-        console.log('Проверка1!')
         this.dispatch({ type: `${ActionTypes.LOGOUT}` });
         cb();
     };

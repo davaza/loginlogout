@@ -13,7 +13,7 @@ export enum AsyncActionTypes {
 }
 
 export enum UrlTypes {
-    URL_LOGIN = 'https://5f216032daa42f00166659f5.mockapi.io/login',
+    URL_LOGIN = 'https://mysterious-reef-29460.herokuapp.com/api/v1/validate',
 }
 
 export interface IDispatchProps {
