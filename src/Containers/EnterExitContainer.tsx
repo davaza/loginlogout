@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { IStateProps } from "../common";
-import { IStoreState } from "../Reducers/reducer";
+import { IStoreState } from "../Reducers/session";
 import { Link } from "react-router-dom";
 
 const EnterExit = (props: any) => {
@@ -17,7 +17,7 @@ const EnterExit = (props: any) => {
 };
 
 function mapStateToProps(state: IStoreState): IStateProps {
-  return { checkAuth: state.checkAuth };
+  return { checkAuth: state.session.checkAuth };
 }
 
 const EnterExitCon = connect(mapStateToProps, null)(EnterExit);

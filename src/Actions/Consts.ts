@@ -9,7 +9,8 @@ export enum AsyncActionTypes {
     BEGIN = '_BEGIN',
     SUCCESS = '_SUCCESS',
     FAILURE = '_FAILURE',
-    INCORRECT_AUTH = '_INCORRECT_AUTH'
+    INCORRECT_AUTH = '_INCORRECT_AUTH',
+
 }
 
 export enum UrlTypes {

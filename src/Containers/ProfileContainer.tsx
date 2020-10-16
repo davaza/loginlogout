@@ -1,11 +1,11 @@
 import { connect } from "react-redux";
 import { IStateProps } from "../common";
-import { IStoreState } from "../Reducers/reducer";
+import { IStoreState } from "../Reducers/session";
 import { Profile } from "../components/Profile";
 
 function mapStateToProps(state: IStoreState): IStateProps {
   return {
-    user: state.user,
+    user: state.session.user,
   };
 }
 

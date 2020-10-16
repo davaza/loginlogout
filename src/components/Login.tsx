@@ -3,10 +3,13 @@ import { IDispatchProps } from "../Actions/Consts";
 import { ILoginData } from "../Actions/Models";
 import { Redirect } from "react-router-dom";
 import { ILoginCheckState } from "../common";
+import { Message } from "./Message";
 
 interface ILoginProps {
   checkAuth?: boolean;
   location?: any;
+  message?: string;
+  loading?: boolean;
 }
 type TLoginProps = IDispatchProps & ILoginProps;
 type TLoginState = ILoginData & ILoginCheckState;
@@ -32,19 +35,17 @@ export class Login extends React.Component<TLoginProps, TLoginState> {
   handleChangeLogin = (e: any) => {
     const { value } = e.currentTarget;
     this.setState({ login: value });
-    console.log("setState: ");
   };
 
   handleChangePass = (e: any) => {
     const { value } = e.currentTarget;
     this.setState({ pass: value });
-    console.log("setState: ");
   };
 
   render() {
     const { login, pass, redirectToPreviousRoute } = this.state;
-    const { location } = this.props;
-    const { from } = location.state || { from: { pathname: "/" } };
+    const { location, message, loading } = this.props;
+    const { from } = location.state || { from: { pathname: "/profile" } };
 
     if (redirectToPreviousRoute) {
       return <Redirect to={from} />;
@@ -75,6 +76,8 @@ export class Login extends React.Component<TLoginProps, TLoginState> {
           </label>
           <button onClick={this.onbtnClickHandler}>Войти</button>
         </form>
+        {loading && "Загрузка"}
+        {message && <Message msg={message || ""} />}
       </div>
     );
   }

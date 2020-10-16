@@ -33,20 +33,15 @@ export class Actions {
                 if (data.status === "ok" && data.data.id !== undefined) {
                     this.dispatch({
                         type: `${ActionTypes.LOGIN}${AsyncActionTypes.SUCCESS}`,
-                        payload: { name: "TEST" }
+                        payload: { name: "TEST", id: data.data.id }
                     });
                     cb();
                 }
-                // if (loginData.login === data[0].login && loginData.pass === data[0].password) {
-                //     this.dispatch({
-                //         type: `${ActionTypes.LOGIN}${AsyncActionTypes.SUCCESS}`,
-                //         payload: { name: data[0].login }
-                //     });
-                //     cb();
-                // } 
-                else {
+                else if (data.status === "err" && data.message === "wrong_email_or_password") {
                     // eslint-disable-next-line no-throw-literal
                     this.dispatch({ type: `${ActionTypes.LOGIN}${AsyncActionTypes.INCORRECT_AUTH}` });
+                } else {
+                    this.dispatch({ type: `${ActionTypes.LOGIN}${AsyncActionTypes.FAILURE}` });
                 }
             });
 

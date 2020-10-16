@@ -2,7 +2,7 @@ import * as React from "react";
 import { Route, Redirect, RouteProps } from "react-router-dom";
 import { connect } from "react-redux";
 import { IStateProps } from "../common";
-import { IStoreState } from "../Reducers/reducer";
+import { IStoreState } from "../Reducers/session";
 
 interface PrivateRouteProps extends RouteProps {
   // tslint:disable-next-line:no-any
@@ -33,7 +33,7 @@ const PrivateRoute = (props: PrivateRouteProps) => {
 
 function mapStateToProps(state: IStoreState): IStateProps {
   return {
-    checkAuth: state.checkAuth,
+    checkAuth: state.session.checkAuth,
   };
 }
 

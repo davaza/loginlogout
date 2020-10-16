@@ -10,6 +10,7 @@ export interface IStateProps {
   loading?: boolean;
   failure?: boolean;
   user?: { name: string };
+  message?: string;
 }
 
 export interface ILoginCheckState {
