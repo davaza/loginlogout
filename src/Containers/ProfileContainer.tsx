@@ -1,14 +1,29 @@
+import { Dispatch } from "redux";
 import { connect } from "react-redux";
-import { IStateProps } from "../common";
-import { IStoreState } from "../Reducers/session";
 import { Profile } from "../components/Profile";
+import { IActionType } from "../common";
+import { IStoreState as IStoreStateProfile } from "../Reducers/profile";
+import {IDispatchProfileProps} from "../Actions/Consts"
+import {ProfileActions} from "../Actions/ProfileActions"
 
-function mapStateToProps(state: IStoreState): IStateProps {
+function mapStateToProps(state: IStoreStateProfile): IStoreStateProfile  {
   return {
-    user: state.session.user,
+    profile: state.profile,
   };
 }
 
-const ProfileCon = connect(mapStateToProps, null)(Profile);
+// function mapDispatchToProps(dispatch: Dispatch<IActionType>): IDispatchSessionProps {
+//   return {
+//     actions: new SessionActions(dispatch),
+//   };
+// }
+
+function mapDispatchToProps(dispatch: Dispatch<IActionType>): IDispatchProfileProps {
+  return {
+    actions: new ProfileActions(dispatch),
+  };
+}
+
+const ProfileCon = connect(mapStateToProps, mapDispatchToProps)(Profile);
 
 export { ProfileCon as ProfileContainer };

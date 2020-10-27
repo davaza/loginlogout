@@ -3,7 +3,7 @@ import { IActionType } from "../common";
 import { ActionTypes, AsyncActionTypes, UrlTypes } from "./Consts";
 import { ILoginData } from "./Models";
 
-export class Actions {
+export class SessionActions {
     constructor(private dispatch: Dispatch<IActionType>) { }
     validation = (loginData: ILoginData, cb: Function) => {
         this.dispatch({ type: `${ActionTypes.LOGIN}${AsyncActionTypes.BEGIN}` });

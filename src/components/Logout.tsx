@@ -1,5 +1,5 @@
 import React from "react";
-import { IDispatchProps } from "../Actions/Consts";
+import { IDispatchSessionProps } from "../Actions/Consts";
 import { ILoginCheckState } from "../common";
 import { Redirect } from "react-router-dom";
 
@@ -7,7 +7,7 @@ interface ILoginProps {
   checkAuth?: boolean;
 }
 
-type TLoginProps = IDispatchProps & ILoginProps;
+type TLoginProps = IDispatchSessionProps & ILoginProps;
 
 export class Logout extends React.Component<TLoginProps, ILoginCheckState> {
   state: ILoginCheckState = {

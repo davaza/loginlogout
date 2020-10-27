@@ -5,8 +5,6 @@ import { LoginContainer } from "./Containers/LoginContainer";
 import { News } from "./components/News";
 import { LogoutContainer } from "./Containers/LogoutContainer";
 import { ProfileContainer } from "./Containers/ProfileContainer";
-import { IDispatchProps } from "./Actions/Consts";
-import { IStateProps } from "./common";
 import "./App.css";
 import { PrivateRoute } from "./Containers/PrivateRoute";
 import { EnterExitContainer } from "./Containers/EnterExitContainer";
@@ -19,7 +17,7 @@ import { EnterExitContainer } from "./Containers/EnterExitContainer";
 //   checkClickLogin: boolean;
 // }
 
-type TProps = IStateProps & IDispatchProps;
+
 
 const App = () => {
   return (

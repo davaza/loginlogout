@@ -1,5 +1,5 @@
 import React from "react";
-import { IDispatchProps } from "../Actions/Consts";
+import { IDispatchSessionProps } from "../Actions/Consts";
 import { ILoginData } from "../Actions/Models";
 import { Redirect } from "react-router-dom";
 import { ILoginCheckState } from "../common";
@@ -11,7 +11,7 @@ interface ILoginProps {
   message?: string;
   loading?: boolean;
 }
-type TLoginProps = IDispatchProps & ILoginProps;
+type TLoginProps = IDispatchSessionProps & ILoginProps;
 type TLoginState = ILoginData & ILoginCheckState;
 
 export class Login extends React.Component<TLoginProps, TLoginState> {
