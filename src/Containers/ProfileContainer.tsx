@@ -9,6 +9,8 @@ import {ProfileActions} from "../Actions/ProfileActions"
 function mapStateToProps(state: IStoreStateProfile): IStoreStateProfile  {
   return {
     profile: state.profile,
+    // failure: state.profile.failure,
+    // userInfo: state.profile.userInfo
   };
 }
 

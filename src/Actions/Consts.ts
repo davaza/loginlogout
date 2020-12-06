@@ -4,7 +4,8 @@ import { ProfileActions } from "./ProfileActions";
 export enum ActionTypes {
     LOGIN = 'ACTION_LOGIN',
     LOGOUT = 'ACTION_LOGOUT',
-    PROFILE = "ACTION_PROFILE"
+    PROFILE = "ACTION_PROFILE",
+    NEWS = "ACTION_NEWS"
 }
 
 export enum AsyncActionTypes {
@@ -18,6 +19,7 @@ export enum UrlTypes {
     URL_ROOT = 'https://mysterious-reef-29460.herokuapp.com/api/v1',
     URL_USER_INFO = 'user-info',
     URL_LOGIN = 'https://mysterious-reef-29460.herokuapp.com/api/v1/validate',
+    URL_NEWS = 'news'
 }
 
 export interface IDispatchSessionProps {

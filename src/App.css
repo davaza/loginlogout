@@ -42,3 +42,12 @@
   font-size: 16px;
   color: red;
 }
+
+.list{
+  list-style-type: none;
+  padding: 0px;
+}
+
+.wrap-info{
+  margin-left: 20px;
+}

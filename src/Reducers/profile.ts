@@ -15,9 +15,19 @@ export interface IStoreState {
     profile: {
         loading: boolean;
         failure: boolean;
+        message: string;
         userInfo: TUserInfo
     }
 }
+
+// export interface IStoreProps {
+//     loading: boolean;
+//     failure: boolean;
+//     message: string;
+//     userInfo: TUserInfo;
+//     //profileProps: any
+
+// }
 
 
 const initialState = {
@@ -25,6 +35,7 @@ const initialState = {
         let profile = {
             loading: false,
             failure: false,
+            message: '',
             userInfo: {
                 city: "",
                 languages: [],
@@ -40,28 +51,24 @@ export default function reducer(state: IStoreState = initialState.state, action:
         case `${ActionTypes.PROFILE}${AsyncActionTypes.BEGIN}`:
             return {
                 ...state,
-                profile: { loading: true }
+                loading: true
             };
         case `${ActionTypes.PROFILE}${AsyncActionTypes.SUCCESS}`:
             return {
                 ...state,
-                profile: {
-                    loading: false,
-                    userInfo: {
-                        city: action.payload.city,
-                        languages: action.payload.languages,
-                        social: action.payload.social
-                    },
-                }
+                loading: false,
+                userInfo: {
+                    city: action.payload.city,
+                    languages: action.payload.languages,
+                    social: action.payload.social
+                },
             };
-        case `${ActionTypes.LOGIN}${AsyncActionTypes.FAILURE}`:
+        case `${ActionTypes.PROFILE}${AsyncActionTypes.FAILURE}`:
             return {
                 ...state,
-                profile: {
-                    loading: false,
-                    failure: true
-                },
-                message: "Проблемы с доступом к серверу"
+                loading: false,
+                failure: true,
+                message: action.payload.errorMsg
             }
     }
     return state;
