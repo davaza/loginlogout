@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import { IActionType } from "../common";
-import { ActionTypes, AsyncActionTypes, UrlTypes } from "./Consts";
+import { ActionTypes, AsyncActionTypes } from "./Consts";
 import { getUserInfo } from "../helpers/getUserInfo";
 import { checkResponse } from "../helpers/checkResponse";
 
