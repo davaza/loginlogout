@@ -1,5 +1,6 @@
 import { SessionActions } from "./SessionActions";
 import { ProfileActions } from "./ProfileActions";
+import { NewsActions } from "./NewsActions";
 
 export enum ActionTypes {
     LOGIN = 'ACTION_LOGIN',
@@ -28,6 +29,10 @@ export interface IDispatchSessionProps {
 
 export interface IDispatchProfileProps {
     actions: ProfileActions;
+}
+
+export interface IDispatchNewsProps {
+    actions: NewsActions;
 }
 
 

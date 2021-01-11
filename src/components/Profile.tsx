@@ -33,7 +33,7 @@ export class Profile extends React.Component<IStoreState&IDispatchProfileProps>{
         (message === 'user_not_found') && <Message msg="Не найден пользователь"/>
       }
     
-    <p></p>
+      <p>{profile.loading && "Загрузка"}</p>
     </div>)
   }
 }

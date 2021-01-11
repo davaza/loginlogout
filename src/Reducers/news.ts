@@ -12,17 +12,19 @@ export type TUserInfo = {
 }
 
 export type TNews = {
-        id: number;
-        title: string;
-        text: string;
+    id: number;
+    title: string;
+    text: string;
 }
 
 
-export interface IStoreStateNews {    
+export interface IStoreStateNews {
+    news: {
         loading: boolean;
         failure: boolean;
         message: string;
         newsData: TNews[]
+    }
 }
 
 // export interface IStoreProps {
@@ -37,12 +39,13 @@ export interface IStoreStateNews {
 
 const initialState = {
     get state(): IStoreStateNews {
-        return { 
+        let news = {
             loading: false,
             failure: false,
             message: '',
             newsData: []
-         };
+        }
+        return { news };
     }
 }
 
@@ -57,11 +60,7 @@ export default function reducer(state: IStoreStateNews = initialState.state, act
             return {
                 ...state,
                 loading: false,
-                newsData: {
-                    id: action.payload.id,
-                    title: action.payload.title,
-                    text: action.payload.text
-                },
+                newsData: action.payload
             };
         case `${ActionTypes.NEWS}${AsyncActionTypes.FAILURE}`:
             return {

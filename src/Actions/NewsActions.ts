@@ -1,12 +1,12 @@
 import { Dispatch } from "redux";
 import { IActionType } from "../common";
-import { ActionTypes, AsyncActionTypes, UrlTypes } from "./Consts";
+import { ActionTypes, AsyncActionTypes } from "./Consts";
 import { getNewsData } from "../helpers/getNewsData";
 import { checkResponse } from "../helpers/checkResponse";
 
 export class NewsActions {
     constructor(private dispatch: Dispatch<IActionType>) { }
-    getNews = (id: string) => {
+    getNews = () => {
         this.dispatch({ type: `${ActionTypes.NEWS}${AsyncActionTypes.BEGIN}` });
 
         getNewsData().then(response => {
