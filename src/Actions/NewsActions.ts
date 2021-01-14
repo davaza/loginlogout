@@ -1,7 +1,7 @@
 import { Dispatch } from "redux";
 import { IActionType } from "../common";
-import { ActionTypes, AsyncActionTypes } from "./Consts";
-import { getNewsData } from "../helpers/getNewsData";
+import { ActionTypes, AsyncActionTypes, UrlTypes } from "./Consts";
+import { getData } from "../helpers/getData";
 import { checkResponse } from "../helpers/checkResponse";
 
 export class NewsActions {
@@ -9,7 +9,7 @@ export class NewsActions {
     getNews = () => {
         this.dispatch({ type: `${ActionTypes.NEWS}${AsyncActionTypes.BEGIN}` });
 
-        getNewsData().then(response => {
+        getData(`${UrlTypes.URL_ROOT}/${UrlTypes.URL_NEWS}`).then(response => {
             if (checkResponse(response)) {
                 this.dispatch({
                     type: `${ActionTypes.NEWS}${AsyncActionTypes.SUCCESS}`,

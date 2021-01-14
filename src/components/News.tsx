@@ -14,7 +14,7 @@ export class News extends React.Component<IStoreStateNews & IDispatchNewsProps>{
       {newsData &&
         <div className="wrap-info">
           <ul className="list">
-            {newsData.map((item) => <li>
+            {newsData.map((item, i) => <li key={i}>
               <h3>{item.title}</h3>
               <p>{item.text}</p>
             </li>)}

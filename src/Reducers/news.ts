@@ -1,16 +1,6 @@
 import { IActionType } from '../common'
 import { ActionTypes, AsyncActionTypes } from '../Actions/Consts';
 
-export type TUserInfo = {
-
-    city: string;
-    languages: string[];
-    social: {
-        label: string;
-        link: string;
-    }[];
-}
-
 export type TNews = {
     id: number;
     title: string;
@@ -26,16 +16,6 @@ export interface IStoreStateNews {
         newsData: TNews[]
     }
 }
-
-// export interface IStoreProps {
-//     loading: boolean;
-//     failure: boolean;
-//     message: string;
-//     userInfo: TUserInfo;
-//     //profileProps: any
-
-// }
-
 
 const initialState = {
     get state(): IStoreStateNews {

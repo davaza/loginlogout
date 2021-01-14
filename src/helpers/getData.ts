@@ -1,8 +1,6 @@
-import { UrlTypes } from '../Actions/Consts';
-
-export const getNewsData = async () => {
+export const getData = async (url: string) => {
     try {
-        const response = await fetch(`${UrlTypes.URL_ROOT}/${UrlTypes.URL_NEWS}`);
+        const response = await fetch(url);
         if (response.ok) {
             const json = await response.json();
             return json;
