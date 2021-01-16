@@ -24,7 +24,7 @@ export class Profile extends React.Component<IStoreState & IDispatchProfileProps
           <ul className="list">
             Ссылки:
             {
-              userInfo.social.map((item, i) => <li key={i}>+<a href={item.link} target="_blank" rel="noopener noreferrer"><img width="24" alt={item.label} src={`/social/${item.label}.png`} /></a></li>)
+              userInfo.social.map((item, i) => <li key={i}>+<a href={item.link} target="_blank" rel="noopener noreferrer"><img width="24" alt={item.label} src={`./social/${item.label}.png`} /></a></li>)
             }
           </ul>
         </div>

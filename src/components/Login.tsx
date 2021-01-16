@@ -4,6 +4,7 @@ import { ILoginData } from "../Actions/Models";
 import { Redirect } from "react-router-dom";
 import { ILoginCheckState } from "../common";
 import { Message } from "./Message";
+import { Preloader } from "./Preloader";
 
 interface ILoginProps {
   checkAuth?: boolean;
@@ -54,31 +55,31 @@ export class Login extends React.Component<TLoginProps, TLoginState> {
       <div className="form-auth-wrap">
         <form className="form-auth clearfix">
           <h2>Вход</h2>
-          <label className="clearfix">
-            Логин:
-            <input
-              type="text"
-              id="login"
-              onChange={this.handleChangeLogin}
-              placeholder="Ваш логин"
-              value={login}
-            />
+          <label htmlFor="login" className="clearfix">
+            Логин
           </label>
-          <label className="clearfix">
-            Пароль:
-            <input
-              type="password"
-              id="pass"
-              onChange={this.handleChangePass}
-              placeholder="Ваш пароль"
-              value={pass}
-            />
+          <input
+            type="text"
+            id="login"
+            onChange={this.handleChangeLogin}
+            placeholder="Ваш логин"
+            value={login}
+          />
+          <label htmlFor="pass" className="clearfix">
+            Пароль
           </label>
+          <input
+            type="password"
+            id="pass"
+            onChange={this.handleChangePass}
+            placeholder="Ваш пароль"
+            value={pass}
+          />
           <button onClick={this.onbtnClickHandler}>Войти</button>
         </form>
-        {loading && "Загрузка"}
-        {message && <Message msg={message || ""} />}
-      </div>
+        { loading && <Preloader />}
+        { message && <Message msg={message || ""} />}
+      </div >
     );
   }
 }
