@@ -12,8 +12,14 @@ interface ILoginProps {
   message?: string;
   loading?: boolean;
 }
+
+interface IStateOthersParamLogin{
+  validEmail: boolean
+}
+
+
 type TLoginProps = IDispatchSessionProps & ILoginProps;
-type TLoginState = ILoginData & ILoginCheckState;
+type TLoginState = ILoginData & ILoginCheckState & IStateOthersParamLogin;
 
 export class Login extends React.Component<TLoginProps, TLoginState> {
   /**
@@ -23,14 +29,25 @@ export class Login extends React.Component<TLoginProps, TLoginState> {
     login: "",
     pass: "",
     redirectToPreviousRoute: false,
+    validEmail: true
   };
 
   onbtnClickHandler = (e: any) => {
     e.preventDefault();
     const { login, pass } = this.state;
+    // eslint-disable-next-line
+    const reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+    if(this.props.loading){
+      return false;
+    }
+    if(reg.test(login) === false) {
+      this.setState({validEmail: false});
+      return false;
+    }
     this.props.actions.validation({ login, pass }, () => {
       this.setState({ redirectToPreviousRoute: true });
     });
+    this.setState({validEmail: true});
   };
 
   handleChangeLogin = (e: any) => {
@@ -44,7 +61,7 @@ export class Login extends React.Component<TLoginProps, TLoginState> {
   };
 
   render() {
-    const { login, pass, redirectToPreviousRoute } = this.state;
+    const { login, pass, redirectToPreviousRoute,validEmail } = this.state;
     const { location, message, loading } = this.props;
     const { from } = location.state || { from: { pathname: "/profile" } };
 
@@ -59,7 +76,7 @@ export class Login extends React.Component<TLoginProps, TLoginState> {
             Логин
           </label>
           <input
-            type="text"
+            type="email"
             id="login"
             onChange={this.handleChangeLogin}
             placeholder="Ваш логин"
@@ -75,10 +92,11 @@ export class Login extends React.Component<TLoginProps, TLoginState> {
             placeholder="Ваш пароль"
             value={pass}
           />
-          <button onClick={this.onbtnClickHandler}>Войти</button>
+          <input type="submit" onClick={this.onbtnClickHandler} disabled={loading} value="Войти"/>
         </form>
-        { loading && <Preloader />}
-        { message && <Message msg={message || ""} />}
+        { loading && <span>Проверяю  <Preloader/></span>}
+        { message && validEmail && <Message msg={message || ""} />}
+        { !validEmail && <Message msg="Введите корректный email!" />}
       </div >
     );
   }

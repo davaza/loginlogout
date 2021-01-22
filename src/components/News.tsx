@@ -1,6 +1,7 @@
 import React from "react";
 import { IStoreStateNews } from "../Reducers/news";
 import { IDispatchNewsProps } from "../Actions/Consts";
+import { Preloader } from "./Preloader";
 
 export class News extends React.Component<IStoreStateNews & IDispatchNewsProps>{
   componentDidMount() {
@@ -20,9 +21,9 @@ export class News extends React.Component<IStoreStateNews & IDispatchNewsProps>{
             </li>)}
           </ul>
           <p>Всего новостей: {newsData.length}</p>
-        </div>
+        </div>        
       }
-      <p>{news.loading && "Загрузка"}</p>
+      { news.loading && !newsData && <Preloader />}
     </div>)
   }
 }

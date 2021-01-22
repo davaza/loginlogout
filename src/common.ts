@@ -14,5 +14,5 @@ export interface IStateProps {
 }
 
 export interface ILoginCheckState {
-  redirectToPreviousRoute: boolean;
+  redirectToPreviousRoute: boolean; 
 }

@@ -2,6 +2,7 @@ import React from "react";
 import { IStoreState } from "../Reducers/profile";
 import { IDispatchProfileProps } from "../Actions/Consts";
 import { Message } from './Message';
+import { Preloader } from "./Preloader";
 
 export class Profile extends React.Component<IStoreState & IDispatchProfileProps>{
   componentDidMount() {
@@ -12,6 +13,7 @@ export class Profile extends React.Component<IStoreState & IDispatchProfileProps
     const { userInfo, message } = profile;
     return (<div>
       <h2>Профиль</h2>
+      { profile.loading && !userInfo && <Preloader />}
       {userInfo &&
         <div className="wrap-info">
           <p>Город: {userInfo.city}</p>
@@ -31,9 +33,7 @@ export class Profile extends React.Component<IStoreState & IDispatchProfileProps
       }
       {
         (message === 'user_not_found') && <Message msg="Не найден пользователь" />
-      }
-
-      <p>{profile.loading && "Загрузка"}</p>
+      }      
     </div>)
   }
 }
