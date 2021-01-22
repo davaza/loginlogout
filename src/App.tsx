@@ -23,7 +23,7 @@ const App = () => {
   return (
     <Router>
       <div>
-        <ul>
+        <ul className="menu">
           <li>
             <Link to="/">Главная</Link>
           </li>
