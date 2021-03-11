@@ -32,7 +32,84 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
+
+.wrap-message {
+  font-size: 16px;
+  color: red;
+}
+
+.list{
+  list-style-type: none;
+  padding: 0px;
+}
+
+.wrap-info{
+  margin-left: 20px;
+}
+
+.form-auth{
+  display: grid;
+  grid-template-columns: 50px 200px;
+  gap: 20px;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.form-auth h2{
+  grid-column: 1/3;
+}
+
+.form-auth label{
+  grid-column: 1/2;
+}
+
+#login{
+  grid-column:  2/3;
+}
+
+.form-auth [type="submit"], .form-auth button{
+  grid-column: 2/3;
+}
+
+.form-auth-wrap{
+  text-align: center;
+}
+.form-auth-wrap .spinner-border{
+  left: auto;
+}
+
+.spinner-border{
+  left: calc(50% - 1rem);
+  position: relative;
+}
+
+.menu{
+  list-style-type: none;
+  margin-top: 10px;
+}
+
+.menu li{
+ background-color: #61fb8f;
+ display: inline-block;
+ margin: 5px;
+ padding: 2px 10px;
+ border-radius: 3px;
+ color: black;
+ cursor: pointer;
+}
+
+.menu li:hover{
+  background-color: #54db7c;
+}
+
+.menu a{
+  text-decoration: none;
+}
+
+
+

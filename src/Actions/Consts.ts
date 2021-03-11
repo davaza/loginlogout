@@ -1,23 +1,38 @@
-import { Actions } from "./Actions";
+import { SessionActions } from "./SessionActions";
+import { ProfileActions } from "./ProfileActions";
+import { NewsActions } from "./NewsActions";
 
 export enum ActionTypes {
     LOGIN = 'ACTION_LOGIN',
     LOGOUT = 'ACTION_LOGOUT',
+    PROFILE = "ACTION_PROFILE",
+    NEWS = "ACTION_NEWS"
 }
 
 export enum AsyncActionTypes {
     BEGIN = '_BEGIN',
     SUCCESS = '_SUCCESS',
     FAILURE = '_FAILURE',
-    INCORRECT_AUTH = '_INCORRECT_AUTH'
+    INCORRECT_AUTH = '_INCORRECT_AUTH',
 }
 
 export enum UrlTypes {
-    URL_LOGIN = 'https://5f216032daa42f00166659f5.mockapi.io/login',
+    URL_ROOT = 'https://mysterious-reef-29460.herokuapp.com/api/v1',
+    URL_USER_INFO = 'user-info',
+    URL_LOGIN = 'https://mysterious-reef-29460.herokuapp.com/api/v1/validate',
+    URL_NEWS = 'news'
 }
 
-export interface IDispatchProps {
-    actions: Actions;
+export interface IDispatchSessionProps {
+    actions: SessionActions;
+}
+
+export interface IDispatchProfileProps {
+    actions: ProfileActions;
+}
+
+export interface IDispatchNewsProps {
+    actions: NewsActions;
 }
 
 

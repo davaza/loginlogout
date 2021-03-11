@@ -1,23 +1,33 @@
 import { IActionType } from '../common'
 import { ActionTypes, AsyncActionTypes } from '../Actions/Consts';
 
-export interface IStoreState {
+export type TSession={
     checkAuth: boolean;
-    loading: boolean;
-    failure: boolean
+    loading?: boolean;
+    failure?: boolean;
+    user?: { name: string };
+    message?: string;
 }
+
+export interface IStoreState {
+    session: TSession
+}
+
 
 const initialState = {
     get state(): IStoreState {
-        return {
+        let session={
             checkAuth: false,
             loading: false,
-            failure: false
+            failure: false,
+            user: undefined,
+            message: ""
         }
+        return {session};
     }
 }
 
-export function reducer(state: IStoreState = initialState.state, action: IActionType) {
+export default function reducer(state: IStoreState = initialState.state, action: IActionType) {
     switch (action.type) {
         case `${ActionTypes.LOGIN}${AsyncActionTypes.BEGIN}`:
             return {
@@ -28,20 +38,27 @@ export function reducer(state: IStoreState = initialState.state, action: IAction
             return {
                 ...state,
                 loading: false,
-                checkAuth: true
+                checkAuth: true,
+                user: {
+                    name: action.payload.name,
+                    id: action.payload.id
+                },
+                message: ""
             }
         case `${ActionTypes.LOGIN}${AsyncActionTypes.INCORRECT_AUTH}`:
             return {
                 ...state,
                 loading: false,
-                checkAuth: false
+                checkAuth: false,
+                message: "Имя пользователя или пароль введены не верно"
             }
         case `${ActionTypes.LOGIN}${AsyncActionTypes.FAILURE}`:
             return {
                 ...state,
                 loading: false,
                 checkAuth: false,
-                failure: true
+                failure: true,
+                message: "Проблемы с доступом к серверу"
             }
         case `${ActionTypes.LOGOUT}`:
             return {
@@ -51,3 +68,6 @@ export function reducer(state: IStoreState = initialState.state, action: IAction
     }
     return state;
 }
+
+
+
